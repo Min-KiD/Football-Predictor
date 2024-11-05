@@ -6,3 +6,4 @@ Our project is about predict analytics tool designed to forecast match outcomes 
 
 Our work is crawling, cleaning, preprocessing data into nice form then explore data analysis to understand more about the data. Final put into model to predict result of the match before the match occur based on history matches and also predict result at the end of first half time based on history data and the data real-time at that moment, how 2 teams played so far
 
+Full dataset and model weights for this project https://drive.google.com/drive/folders/1P_PBn7AdrQO-gB4BTYtasWp9QKg0q9yn
