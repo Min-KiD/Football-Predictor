@@ -6,12 +6,11 @@ python -m venv venv
 # Activate the virtual environment
 source venv/bin/activate
 
+# Move into the project directory
+cd epl_scrape_main
+
 # Install the required packages
 pip install -r requirements.txt
 
-# Move into the project directory
-cd epl_scrape
-
 # Run the Scrapy spiders
-scrapy crawl season_ids
-scrapy crawl matches
+scrapy crawl matches -a from_season=2019/20 -a to_season=2023/24
