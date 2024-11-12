@@ -1,0 +1,2 @@
+[scrapy]
+settings = epl_scrape.settings

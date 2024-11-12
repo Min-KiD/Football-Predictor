@@ -1,0 +1,13 @@
+setup.py
+epl_scrape/__init__.py
+epl_scrape/items.py
+epl_scrape/middlewares.py
+epl_scrape/pipelines.py
+epl_scrape/settings.py
+epl_scrape/spiders/__init__.py
+epl_scrape/spiders/match_spider.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
