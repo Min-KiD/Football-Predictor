@@ -5,7 +5,9 @@ import json
 class MatchSpider(scrapy.Spider):
     name = "matches"
 
-    def __init__(self, from_season="2023/24", to_season="2023/24", *args, **kwargs):
+    def __init__(
+        self, from_season="2023/24", to_season="2023/24", *args, **kwargs
+    ):
         super().__init__(*args, **kwargs)
         self.from_year = int(from_season[:4])
         self.to_year = int(to_season[:4])
@@ -27,7 +29,7 @@ class MatchSpider(scrapy.Spider):
 
     def parse_season(self, response):
         data = json.loads(response.text)
-        for match in data['content']:
+        for match in data["content"]:
             match_id = str(int(match["id"]))
             info_url = f"https://footballapi.pulselive.com/football/fixtures/{match_id}?altIds=true"
             yield response.follow(info_url, self.parse_match_info)
@@ -36,12 +38,11 @@ class MatchSpider(scrapy.Spider):
         match_info = json.loads(response.text)
         match_id = match_info.get("id")
         stats_url = f"https://footballapi.pulselive.com/football/stats/match/{match_id}"
-        yield response.follow(stats_url, self.parse_match_stats, meta={"match_info": match_info})
+        yield response.follow(
+            stats_url, self.parse_match_stats, meta={"match_info": match_info}
+        )
 
     def parse_match_stats(self, response):
         match_info = response.meta.get("match_info")
         match_stats = json.loads(response.text)
-        yield {
-            "match_info": match_info,
-            "match_stats": match_stats
-        }
+        yield {"match_info": match_info, "match_stats": match_stats}
