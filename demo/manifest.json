@@ -1,0 +1,37 @@
+{
+    "manifest_version": 3,
+    "name": "Ball Predictor",
+    "version": "1.0",
+    "icons": {
+        "16": "images/korosan-16.png",
+        "32": "images/korosan-32.png",
+        "48": "images/korosan-48.png",
+        "128": "images/korosan-128.png"
+    },
+    "description": "Reads the title of the current tab and displays it in a popup.",
+    "permissions": [
+        "tabs",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/korosan-16.png",
+            "32": "images/korosan-32.png",
+            "48": "images/korosan-48.png",
+            "128": "images/korosan-128.png"
+        }
+    },
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["libs/chart.umd.js", "libs/chartjs-plugin-datalabels.min.js", "teams.json", "popup.css"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    }
+}

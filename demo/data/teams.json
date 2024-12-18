@@ -1,0 +1,22 @@
+{
+    "arsenal": { "names": ["arsenal", "ars", "arsenal fc"], "color": "rgba(239, 1, 7, ALPHA)" },
+    "aston villa": { "names": ["aston villa", "avl", "villa"], "color": "rgba(129, 28, 52, ALPHA)" },
+    "bournemouth": { "names": ["bournemouth", "bou", "bournemouth fc"], "color": "rgba(255, 0, 0, ALPHA)" },
+    "brentford": { "names": ["brentford", "bre", "brentford fc"], "color": "rgba(227, 6, 19, ALPHA)" },
+    "brighton & hove albion": { "names": ["brighton & hove albion", "bha", "brighton"], "color": "rgba(0, 87, 184, ALPHA)" },
+    "chelsea": { "names": ["chelsea", "che", "chelsea fc"], "color": "rgba(3, 70, 148, ALPHA)" },
+    "crystal palace": { "names": ["crystal palace", "cry", "palace"], "color": "rgba(27, 69, 143, ALPHA)" },
+    "everton": { "names": ["everton", "eve", "everton fc"], "color": "rgba(39, 68, 136, ALPHA)" },
+    "fulham": { "names": ["fulham", "ful", "fulham fc"], "color": "rgba(0, 0, 0, ALPHA)" },
+    "ipswich town": { "names": ["ipswich town", "ips", "ipswich"], "color": "rgba(0, 56, 168, ALPHA)" },
+    "leicester city": { "names": ["leicester city", "lei", "leicester"], "color": "rgba(0, 83, 160, ALPHA)" },
+    "liverpool": { "names": ["liverpool", "liv", "liverpool fc"], "color": "rgba(200, 16, 46, ALPHA)" },
+    "manchester city": { "names": ["manchester city", "mci", "man city"], "color": "rgba(0, 133, 199, ALPHA)" },
+    "manchester united": { "names": ["manchester united", "mun", "man utd", "man united", "mu"], "color": "rgba(218, 41, 28, ALPHA)" },
+    "newcastle united": { "names": ["newcastle united", "new", "newcastle"], "color": "rgba(45, 41, 38, ALPHA)" },
+    "nottingham forest": { "names": ["nottingham forest", "nottingham", "forest"], "color": "rgba(255, 0, 0, ALPHA)" },
+    "southampton": { "names": ["southampton", "sou", "southampton fc"], "color": "rgba(215, 25, 32, ALPHA)" },
+    "tottenham hotspur": { "names": ["tottenham hotspur", "tottenham", "tot", "spurs"], "color": "rgba(19, 34, 87, ALPHA)" },
+    "west ham united": { "names": ["west ham united", "whu", "west ham"], "color": "rgba(122, 38, 58, ALPHA)" },
+    "wolverhampton wanderers": { "names": ["wolverhampton wanderers", "wol", "wolves"], "color": "rgba(253, 185, 19, ALPHA)" }
+}
