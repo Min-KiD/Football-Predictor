@@ -1,48 +1,71 @@
-import scrapy
+from scrapy import Spider, Request
 import json
+from constant import COMP_SEASONS
 
 
-class MatchSpider(scrapy.Spider):
-    name = "matches"
-
-    def __init__(
-        self, from_season="2023/24", to_season="2023/24", *args, **kwargs
-    ):
-        super().__init__(*args, **kwargs)
-        self.from_year = int(from_season[:4])
-        self.to_year = int(to_season[:4])
+class CrawlerSpider(Spider):
+    name = "match"
 
     def start_requests(self):
-        url = "https://footballapi.pulselive.com/football/competitions/1/compseasons?page=0&pageSize=100&startDate=1992-01-01"
-        yield scrapy.Request(url=url, callback=self.parse)
+        for start_url, season, value in self.gen_start_urls():
+            yield Request(
+                url=start_url,
+                callback=self.parse,
+                meta={"season": season, "value": value},
+            )
 
-    def parse(self, response, **kwargs):
-        season_ids_dict = {}
+    def gen_start_urls(self):
+        for k, v in COMP_SEASONS.items():
+            yield f"https://footballapi.pulselive.com/football/fixtures?comps=1&compSeasons={v}&page=0&pageSize=2000", k, v
+
+    def parse(self, response):
         data = json.loads(response.text)
-        for season in data["content"]:
-            season_year = int(season["label"][:4])
-            if self.from_year <= season_year <= self.to_year:
-                season_ids_dict[season["label"]] = str(int(season["id"]))
-        for season, season_id in season_ids_dict.items():
-            season_url = f"https://footballapi.pulselive.com/football/fixtures?comps=1&compSeasons={season_id}&page=0&pageSize=2000"
-            yield response.follow(season_url, self.parse_season)
+        season = response.meta["season"]
+        # for i in range(1, 6):
+        #     id = str(int(data["content"][i]["id"]))
+        for _match in data["content"]:
+            id = str(int(_match["id"]))
+            yield response.follow(
+                f"https://footballapi.pulselive.com/football/fixtures/{id}?altIds=true",
+                self.parse_match_and_stats,
+                meta={"season": season},
+            )
 
-    def parse_season(self, response):
-        data = json.loads(response.text)
-        for match in data["content"]:
-            match_id = str(int(match["id"]))
-            info_url = f"https://footballapi.pulselive.com/football/fixtures/{match_id}?altIds=true"
-            yield response.follow(info_url, self.parse_match_info)
+    def parse_match_and_stats(self, response):
+        match_data = json.loads(response.text)
+        season = response.meta["season"]
 
-    def parse_match_info(self, response):
-        match_info = json.loads(response.text)
-        match_id = match_info.get("id")
+        match_id = match_data.get("id")
         stats_url = f"https://footballapi.pulselive.com/football/stats/match/{match_id}"
         yield response.follow(
-            stats_url, self.parse_match_stats, meta={"match_info": match_info}
+            stats_url,
+            self.parse_stats,
+            meta={"match_data": match_data, "season": season},
         )
 
-    def parse_match_stats(self, response):
-        match_info = response.meta.get("match_info")
-        match_stats = json.loads(response.text)
-        yield {"match_info": match_info, "match_stats": match_stats}
+    def parse_stats(self, response):
+        match_data = response.meta.get("match_data")
+        season = response.meta["season"]
+        stats_data = json.loads(response.text)
+
+        combined_data = self.combine_data(match_data, stats_data)
+        combined_data["season"] = season
+        combined_data["type"] = "match"
+        yield combined_data
+
+    def combine_data(self, match_data, stats_data):
+        combined_data = {
+            "id": match_data.get("id"),
+            "kick_off": match_data.get("kickoff"),
+            "teams": match_data.get("teams"),
+            "ground": match_data.get("ground"),
+            "clock": match_data.get("clock"),
+            "halfTimeScore": match_data.get("halfTimeScore"),
+            "teamLists": match_data.get("teamLists"),
+            "events": match_data.get("events")[
+                "type" == "G" or "type" == "P" or "type" == "O"
+            ],
+            "stats": stats_data.get("data"),
+        }
+
+        return combined_data

@@ -28,7 +28,7 @@ FEED_STORAGES = {
 FEEDS = {
     "gsheets://docs.google.com/spreadsheets/d/1_FbBbss_NAuaqIWKs7kwhDBEtzD7LS1zhAEDikQsBXw/edit#gid=0": {
         "format": "csv",
-        "overwrite": True
+        "overwrite": True,
     }
 }
 GOOGLE_CREDENTIALS = {
@@ -42,11 +42,11 @@ GOOGLE_CREDENTIALS = {
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scrapy-cloud%40secure-proxy-324607.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
+    "universe_domain": "googleapis.com",
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "epl_scrape (+http://www.yourdomain.com)"
+# USER_AGENT = "epl_scrape (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -59,14 +59,14 @@ CONCURRENT_REQUESTS = 32
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 0.5
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+# CONCURRENT_REQUESTS_PER_DOMAIN = 16
+# CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
-#TELNETCONSOLE_ENABLED = False
+# TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
@@ -77,48 +77,49 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    "epl_scrape.middlewares.EplScrapeSpiderMiddleware": 543,
-#}
+# }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    "epl_scrape.middlewares.EplScrapeDownloaderMiddleware": 543,
-#}
+# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    "scrapy.extensions.telnet.TelnetConsole": None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "epl_scrape.pipelines.MatchPipeline": 300,
+    "epl_scrape.pipelines.MatchPipeline": 300,
+    "epl_scrape.pipelines.PlayerPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
+# AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
-#HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = "httpcache"
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
+# HTTPCACHE_ENABLED = True
+# HTTPCACHE_EXPIRATION_SECS = 0
+# HTTPCACHE_DIR = "httpcache"
+# HTTPCACHE_IGNORE_HTTP_CODES = []
+# HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
